@@ -65,7 +65,7 @@ export const CarDetails: React.FC = () => {
           </About>
         </Content>
         <Footer>
-          <Button title='testizinho' />
+          <Button title='Confirmar' />
         </Footer>
       </Container>
     </>
