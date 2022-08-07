@@ -14,8 +14,9 @@ import {
   Price,
   About,
   Acessories,
+  Footer
 } from './styles'
-import { BackButton, ImageSlider, Accessory } from 'src/components'
+import { BackButton, ImageSlider, Accessory, Button } from 'src/components'
 import { StatusBar } from 'react-native'
 import SpeedSvg from 'src/assets/speed.svg'
 import Acceleration from 'src/assets/acceleration.svg'
@@ -63,6 +64,9 @@ export const CarDetails: React.FC = () => {
             Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
           </About>
         </Content>
+        <Footer>
+          <Button title='testizinho' />
+        </Footer>
       </Container>
     </>
  )

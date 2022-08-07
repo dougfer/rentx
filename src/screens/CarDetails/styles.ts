@@ -1,4 +1,4 @@
-import { getStatusBarHeight } from "react-native-iphone-x-helper"
+import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper"
 import styled from "styled-components/native"
 import { ScrollViewProps } from 'react-native'
 import { RFValue } from "react-native-responsive-fontsize"
@@ -26,7 +26,7 @@ export const Content = styled.ScrollView.attrs<ScrollViewProps>({
     padding: 23,
     alignItems: 'center',
   },
-  showsVeticalScrollIndicator: false
+  showsVerticalScrollIndicator: false
 })`
 
 `
@@ -87,4 +87,12 @@ export const Acessories = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
+`
+
+export const Footer = styled.View`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.background_secondary};
+
+  padding: 24px;
+  padding-bottom: ${getBottomSpace() + 24}px;
 `
