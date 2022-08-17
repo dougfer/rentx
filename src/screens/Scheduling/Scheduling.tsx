@@ -11,7 +11,7 @@ import {
   Footer,
 } from './styles'
 import Arrow from 'src/assets/arrow.svg'
-import { BackButton, Button } from 'src/components'
+import { BackButton, Button, Calendar } from 'src/components'
 import { StatusBar } from 'react-native'
 import { useTheme } from 'styled-components'
 
@@ -46,7 +46,7 @@ export const Scheduling: React.FC = () => {
         </RentalPeriod>
       </Header>
       <Content>
-
+        <Calendar />
       </Content>
       <Footer>
         <Button title='Confirmar' />
