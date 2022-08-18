@@ -24,9 +24,17 @@ import Force from 'src/assets/force.svg'
 import Gasoline from 'src/assets/gasoline.svg'
 import Exchange from 'src/assets/exchange.svg'
 import People from 'src/assets/people.svg'
+import { useNavigation } from '@react-navigation/native'
 
 export const CarDetails: React.FC = () => {
- return (
+
+  const navigation = useNavigation()
+
+  const handleSchedule = () => {
+    navigation.navigate('Scheduling')
+  }
+
+  return (
     <>
       <StatusBar
         barStyle='dark-content' 
@@ -65,9 +73,9 @@ export const CarDetails: React.FC = () => {
           </About>
         </Content>
         <Footer>
-          <Button title='Confirmar' />
+          <Button title='Escolher período do aluguel' onPress={handleSchedule} />
         </Footer>
       </Container>
     </>
- )
+  )
 }

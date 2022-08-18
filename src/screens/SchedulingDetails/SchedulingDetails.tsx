@@ -36,12 +36,19 @@ import People from 'src/assets/people.svg'
 import { Feather } from '@expo/vector-icons'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useTheme } from 'styled-components'
+import { useNavigation } from '@react-navigation/native'
 
 export const SchedulingDetails: React.FC = () => {
 
   const { colors } = useTheme()
 
- return (
+  const navigation = useNavigation()
+
+  const handleConfirm = () => {
+    navigation.navigate('SchedulingComplete')
+  }
+
+  return (
     <>
       <StatusBar
         barStyle='dark-content' 
@@ -108,9 +115,9 @@ export const SchedulingDetails: React.FC = () => {
           </RentalPrice>
         </Content>
         <Footer>
-          <Button title='Confirmar' />
+          <Button title='Alugar agora' color={colors.success} onPress={handleConfirm} />
         </Footer>
       </Container>
     </>
- )
+  )
 }

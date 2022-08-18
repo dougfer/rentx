@@ -10,7 +10,7 @@ interface ButtonProps extends RectButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({ title, color, ...rest }) => {
  return (
-   <Container {...rest}  color={color} >
+   <Container {...rest} color={color} >
       <Title>{title}</Title>
    </Container>
  )

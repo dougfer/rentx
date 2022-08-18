@@ -4,11 +4,14 @@ import { StatusBar } from 'react-native'
 import Logo from 'src/assets/logo.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Car } from 'src/components'
+import { useNavigation } from '@react-navigation/native'
 
 export const Home: React.FC = () => {
 
+  const navigation = useNavigation()
+
   const carData = {
-    thumbnail: 'https://img1.gratispng.com/20171220/kiq/audi-png-car-image-5a3b1f1eb47de9.9104985015138240307393.jpg',
+    thumbnail: 'http://1.bp.blogspot.com/-NVsSLLnT-3Y/UGWaqEiU-lI/AAAAAAAAAKw/4e3nGCqFIxc/s1600/png_carro1.png',
     name: 'Nome do Carrro',
     brand: 'Audi',
     rent: {
@@ -17,6 +20,10 @@ export const Home: React.FC = () => {
     }
   }
 
+  const handleCarDetails = () => {
+    console.log('oioioi')
+    navigation.navigate('CarDetails')
+  }
 
   return (
     <>
@@ -36,7 +43,7 @@ export const Home: React.FC = () => {
         </Header>
         <CarList 
           data={[1,2,3,4,5,6,7]}
-          renderItem={({ item }) => <Car data={carData} />}
+          renderItem={({ item }) => <Car data={carData} onPress={handleCarDetails} />}
           keyExtractor={item => String(item)}
         />
       </Container>

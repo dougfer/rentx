@@ -14,11 +14,18 @@ import Arrow from 'src/assets/arrow.svg'
 import { BackButton, Button, Calendar } from 'src/components'
 import { StatusBar } from 'react-native'
 import { useTheme } from 'styled-components'
+import { useNavigation } from '@react-navigation/native'
+
 
 
 export const Scheduling: React.FC = () => {
+  const navigation = useNavigation()
 
   const theme = useTheme()
+
+  const handleConfirmDate = () => {
+    navigation.navigate('SchedulingDetails')
+  }
 
  return (
   <>
@@ -33,14 +40,12 @@ export const Scheduling: React.FC = () => {
           <DateInfo>
             <DateTitle>DE</DateTitle>
             <DateValue>
-
             </DateValue>
           </DateInfo>
           <Arrow />
           <DateInfo>
             <DateTitle>ATÉ</DateTitle>
             <DateValue>
-
             </DateValue>
           </DateInfo>
         </RentalPeriod>
@@ -49,7 +54,7 @@ export const Scheduling: React.FC = () => {
         <Calendar />
       </Content>
       <Footer>
-        <Button title='Confirmar' />
+        <Button title='Confirmar' onPress={handleConfirmDate} />
       </Footer>
     </Container>
   </>
