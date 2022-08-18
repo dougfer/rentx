@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, CarDetails, Scheduling, SchedulingDetails } from 'src/screens'
+import { Home, CarDetails, Scheduling, SchedulingDetails, SchedulingComplete } from 'src/screens'
 import { 
   useFonts,
   Inter_400Regular, 
@@ -28,7 +28,7 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <SchedulingDetails />
+      <SchedulingComplete />
     </ThemeProvider>
   );
 }
