@@ -13,25 +13,18 @@ import {
 } from './styles'
 import GasolineSvg from 'src/assets/gasoline.svg'
 import { RectButtonProps } from 'react-native-gesture-handler'
-
-interface Data {
-  brand: string
-  name: string
-  thumbnail: string
-  rent: {
-    period: string
-    price: number
-  }
-}
+import { CarDto } from 'src/dtos/CarDTO'
+import { getAccessoryIcon } from 'src/utils/getAccessoryIcon'
 
 interface CarProps extends RectButtonProps {
-  data: Data
+  data: CarDto
   children?: ReactNode
 }
 
 export const Car: React.FC<CarProps> = ({data, children, ...rest}) => {
-
-  const {  brand, name, rent, thumbnail  } = data
+  
+  const {  brand, name, rent, thumbnail, fuel_type  } = data
+  const MotorIcon = getAccessoryIcon(fuel_type)
 
   return (
     <Container {...rest}>
@@ -44,7 +37,7 @@ export const Car: React.FC<CarProps> = ({data, children, ...rest}) => {
             <Price>R${rent.price}</Price>
           </Rent>
           <Type>
-            <GasolineSvg />
+            <MotorIcon />
           </Type>
         </About>
       </Details>

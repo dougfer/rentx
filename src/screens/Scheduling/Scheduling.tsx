@@ -32,7 +32,7 @@ export const Scheduling: React.FC = () => {
     <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
     <Container>
       <Header>
-        <BackButton onPress={() => {}} color={theme.colors.shape} />
+        <BackButton onPress={navigation.goBack} color={theme.colors.shape} />
         <Title>
           Escolha uma {'\n'}data de início e{'\n'}fim do aluguel
         </Title>

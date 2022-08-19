@@ -56,7 +56,7 @@ export const SchedulingDetails: React.FC = () => {
       />
       <Container>
         <Header>
-          <BackButton onPress={() => {}} />
+          <BackButton onPress={navigation.goBack} />
         </Header>
         <CarImages>
           <ImageSlider imagesUrl={['http://1.bp.blogspot.com/-NVsSLLnT-3Y/UGWaqEiU-lI/AAAAAAAAAKw/4e3nGCqFIxc/s1600/png_carro1.png']} />
