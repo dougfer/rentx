@@ -17,6 +17,8 @@ import { Routes } from 'src/routes'
 import 'react-native-gesture-handler'
 import { View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import 'intl'
+import 'intl/locale-data/jsonp/pt-BR'
 
 export default function App() {
   const [fontsLoaded] = useFonts({

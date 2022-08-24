@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { 
   Container,
   Header,
@@ -26,27 +26,59 @@ import {
   RentralPriceTotal,
 } from './styles'
 import { BackButton, ImageSlider, Accessory, Button } from 'src/components'
-import { StatusBar } from 'react-native'
-import SpeedSvg from 'src/assets/speed.svg'
-import Acceleration from 'src/assets/acceleration.svg'
-import Force from 'src/assets/force.svg'
-import Gasoline from 'src/assets/gasoline.svg'
-import Exchange from 'src/assets/exchange.svg'
-import People from 'src/assets/people.svg'
+import { Alert, StatusBar } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useTheme } from 'styled-components'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { CarDto } from 'src/dtos/CarDTO'
+import { getAccessoryIcon } from 'src/utils/getAccessoryIcon'
+import { format } from 'date-fns'
+import { getPlatformDate } from 'src/utils/getPlataformDate'
+import { formatToRealStr } from 'src/utils/format'
+import { api } from 'src/services/api'
+interface RouteParams {
+  car: CarDto
+  dates: string[]
+}
 
 export const SchedulingDetails: React.FC = () => {
-
   const { colors } = useTheme()
 
   const navigation = useNavigation()
 
-  const handleConfirm = () => {
+  const route = useRoute()
+
+  const { car, dates } = route.params as RouteParams
+
+  const handleConfirm = async () => {
+
+    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
+
+    const unavailable_dates = [
+      ...schedulesByCar.data.unavailable_dates,
+      ...dates
+    ]
+
+    api.put(`/schedules_bycars/${car.id}`, {
+      id: car.id,
+      unavailable_dates
+    })
+    .then(() => navigation.navigate('SchedulingComplete'))
+    .catch(() => Alert.alert('Não foi possível confirmar o agendamento'))
+
     navigation.navigate('SchedulingComplete')
   }
+
+  const startDate = useMemo(() => {
+    return format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyy')
+  },[dates])
+
+  const endDate = useMemo(() => {
+    return format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyy')
+  },[dates])
+
+  const total = dates.length * car.rent.price
 
   return (
     <>
@@ -59,27 +91,28 @@ export const SchedulingDetails: React.FC = () => {
           <BackButton onPress={navigation.goBack} />
         </Header>
         <CarImages>
-          <ImageSlider imagesUrl={['http://1.bp.blogspot.com/-NVsSLLnT-3Y/UGWaqEiU-lI/AAAAAAAAAKw/4e3nGCqFIxc/s1600/png_carro1.png']} />
+          <ImageSlider imagesUrl={[car.thumbnail]} />
         </CarImages>
         <Content>
           <Details>
             <Description>
-              <Brand>Brand qualquer</Brand>
-              <Name>Nome qualquer</Name>
+              <Brand>{car.brand}</Brand>
+              <Name>{car.name}</Name>
             </Description>
 
             <Rent>
-              <Period>Ao dia</Period>
-              <Price>R$ 500</Price>
+              <Period>{car.rent.period}</Period>
+              <Price>R$ {car.rent.price}</Price>
             </Rent>
           </Details>
           <Acessories>
-            <Accessory name='380Km/h' icon={SpeedSvg} />
-            <Accessory name='3.2s' icon={Acceleration} />
-            <Accessory name='800 HP' icon={Force} />
-            <Accessory name='Gasolina' icon={Gasoline} />
-            <Accessory name='Auto' icon={Exchange} />
-            <Accessory name='2 Pessoas' icon={People} />
+          {car.accessories.map((accessory) => (
+              <Accessory 
+                key={accessory.type}
+                name={accessory.name}
+                icon={getAccessoryIcon(accessory.type)} 
+              />
+            ))}
           </Acessories>
 
           <RentalPeriod>
@@ -92,7 +125,7 @@ export const SchedulingDetails: React.FC = () => {
             </CalendarIcon>
             <DateInfo>
               <DateTitle>DE</DateTitle>
-              <DateValue>18/06/2021</DateValue>
+              <DateValue>{startDate}</DateValue>
             </DateInfo>
             <Feather 
                 name='chevron-right'
@@ -101,7 +134,7 @@ export const SchedulingDetails: React.FC = () => {
               />
             <DateInfo>
               <DateTitle>DE</DateTitle>
-              <DateValue>18/06/2021</DateValue>
+              <DateValue>{endDate}</DateValue>
             </DateInfo>
           </RentalPeriod>
           <RentalPrice>
@@ -109,8 +142,8 @@ export const SchedulingDetails: React.FC = () => {
               TOTAL
             </RentalPriceLabel>
             <RenatalPriceDetails>
-              <RentralPriceQuota>R$ 580 x3 diárias</RentralPriceQuota>
-              <RentralPriceTotal>R$ 2.900</RentralPriceTotal>
+              <RentralPriceQuota>R$ {car.rent.price} x{dates.length} diárias</RentralPriceQuota>
+              <RentralPriceTotal>{formatToRealStr(total)}</RentralPriceTotal>
             </RenatalPriceDetails>
           </RentalPrice>
         </Content>
