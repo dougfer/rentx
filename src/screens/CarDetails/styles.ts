@@ -2,6 +2,7 @@ import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper
 import styled from "styled-components/native"
 import { ScrollViewProps } from 'react-native'
 import { RFValue } from "react-native-responsive-fontsize"
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background_secondary};

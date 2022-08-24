@@ -14,14 +14,13 @@ import {
   Price,
   About,
   Acessories,
-  Footer
+  Footer,
 } from './styles'
 import { BackButton, ImageSlider, Accessory, Button } from 'src/components'
-import { StatusBar } from 'react-native'
+import { StatusBar, Text } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { CarDto } from 'src/dtos/CarDTO'
 import { getAccessoryIcon } from 'src/utils/getAccessoryIcon'
-
 interface RouteParams {
   car: CarDto
 }
