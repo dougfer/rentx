@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar, FlatList } from 'react-native'
-import { BackButton, Car } from 'src/components'
+import { BackButton, Car, Load } from 'src/components'
 import { CarDto } from 'src/dtos/CarDTO'
 import { api } from 'src/services/api'
 import { 
@@ -12,14 +12,21 @@ import {
   Appointments,
   AppointmentsTitle,
   AppointmentsQuantity,
+  CarWrapper,
+  CarFooter,
+  CarFooterTitle,
+  CarFooterPeriod,
+  CarFooterDate,
 } from './style'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
-
+import { AntDesign } from '@expo/vector-icons'
 interface CarProps {
   car: CarDto
   user_id: string
   id: string
+  startDate: string
+  endDate: string
 }
 
 export const MyCars: React.FC = () => {
@@ -52,16 +59,16 @@ export const MyCars: React.FC = () => {
       <Header>
         <BackButton onPress={navigation.goBack} color={theme.colors.shape} />
         <Title>
-          Escolha uma {'\n'}data de início e{'\n'}fim do aluguel
+          Seus agendamentos, {'\n'}estão aqui.
         </Title>
         <SubTitle>
           Conforto, segurança e praticidade
         </SubTitle>
       </Header>
-      <Content>
+      {loading ? <Load /> : <Content>
         <Appointments>
           <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
-          <AppointmentsQuantity>05</AppointmentsQuantity>
+          <AppointmentsQuantity>{cars.length}</AppointmentsQuantity>
         </Appointments>
 
         <FlatList 
@@ -71,9 +78,26 @@ export const MyCars: React.FC = () => {
           contentContainerStyle={{
             paddingBottom: 24,
           }}
-          renderItem={({item}) => <Car data={item.car} />}
+          renderItem={({item}) => (
+            <CarWrapper>
+              <Car data={item.car} />
+              <CarFooter>
+                <CarFooterTitle>Período</CarFooterTitle>
+                <CarFooterPeriod>
+                  <CarFooterDate>{item.startDate}</CarFooterDate>
+                  <AntDesign 
+                    name='arrowright'
+                    size={20}
+                    color={theme.colors.title}
+                    style={{ marginHorizontal: 10 }}
+                  />
+                  <CarFooterDate>{item.endDate}</CarFooterDate>
+                </CarFooterPeriod>
+              </CarFooter>
+            </CarWrapper>
+          )}
         />
-      </Content>
+      </Content>}
     </Container>
     </>
   )

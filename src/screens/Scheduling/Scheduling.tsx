@@ -42,9 +42,6 @@ export const Scheduling: React.FC = () => {
   const theme = useTheme()
 
   const handleConfirmDate = () => {
-    if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      return Alert.alert('Selecione o intervalo para alugar')
-    }
     navigation.navigate('SchedulingDetails', {
       car,
       dates: Object.keys(markedDates)
@@ -61,8 +58,6 @@ export const Scheduling: React.FC = () => {
     }
 
     setlastSelectedDate(end)
-    console.log('end', end)
-    console.log('start', start)
     const interval = generateInterval(start, end)
     setMarkedDates(interval)
     const firstDate = Object.keys(interval)[0]
@@ -107,7 +102,7 @@ export const Scheduling: React.FC = () => {
         />
       </Content>
       <Footer>
-        <Button title='Confirmar' onPress={handleConfirmDate} />
+        <Button title='Confirmar' enabled={!!rentalPeriod.startFormatted} onPress={handleConfirmDate} />
       </Footer>
     </Container>
   </>

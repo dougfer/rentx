@@ -43,6 +43,7 @@ interface RouteParams {
 }
 
 export const SchedulingDetails: React.FC = () => {
+  const [loading, setLoading] = useState(false)
   const { colors } = useTheme()
 
   const navigation = useNavigation()
@@ -52,7 +53,7 @@ export const SchedulingDetails: React.FC = () => {
   const { car, dates } = route.params as RouteParams
 
   const handleConfirm = async () => {
-
+    setLoading(true)
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
 
     const unavailable_dates = [
@@ -63,6 +64,8 @@ export const SchedulingDetails: React.FC = () => {
     await api.post('schedules_byuser', {
       car,
       user_id: 1,
+      startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyy'),
+      endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyy')
     })
 
     api.put(`/schedules_bycars/${car.id}`, {
@@ -70,9 +73,10 @@ export const SchedulingDetails: React.FC = () => {
       unavailable_dates
     })
     .then(() => navigation.navigate('SchedulingComplete'))
-    .catch(() => Alert.alert('Não foi possível confirmar o agendamento'))
-
-    navigation.navigate('SchedulingComplete')
+    .catch(() => {
+      Alert.alert('Não foi possível confirmar o agendamento')
+      setLoading(false)
+    })
   }
 
   const startDate = useMemo(() => {
@@ -153,7 +157,7 @@ export const SchedulingDetails: React.FC = () => {
           </RentalPrice>
         </Content>
         <Footer>
-          <Button title='Alugar agora' color={colors.success} onPress={handleConfirm} />
+          <Button title='Alugar agora' loading={loading} color={colors.success} onPress={handleConfirm} />
         </Footer>
       </Container>
     </>
