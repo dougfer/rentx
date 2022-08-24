@@ -2,8 +2,6 @@ import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 import { Calendar as CustomCalendar, LocaleConfig } from 'react-native-calendars'
-import theme from 'src/styles/theme'
-import { SegmentedControlIOSComponent } from 'react-native'
 
 LocaleConfig.locales['pt-br'] = {
   monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
