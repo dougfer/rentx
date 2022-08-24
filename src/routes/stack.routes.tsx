@@ -1,14 +1,18 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { CarDetails, Home, Scheduling, SchedulingComplete, SchedulingDetails, MyCars } from 'src/screens'
+import { CarDetails, Home, Scheduling, SchedulingComplete, SchedulingDetails, MyCars, Splash } from 'src/screens'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
 export const StackRoutes = () => {
   return (
-    <Navigator screenOptions={{
+    <Navigator  initialRouteName='Splash' screenOptions={{
       headerShown: false
     }}>
+      <Screen 
+        name='Splash'
+        component={Splash}
+      />
       <Screen 
         name='Home'
         component={Home}
