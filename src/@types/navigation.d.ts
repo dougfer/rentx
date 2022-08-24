@@ -5,9 +5,9 @@ export declare global {
     interface RootParamList {
       Home: undefined
       CarDetails: { car: CarDto }
-      Scheduling: undefined
+      Scheduling: { car: CarDto }
       SchedulingComplete: undefined
-      SchedulingDetails: undefined
+      SchedulingDetails: { car: CarDto, dates: string[] }
     }
   }
 }
