@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from './styles'
+import Brand from 'src/assets/brand.svg'
+import Logo from 'src/assets/logo.svg'
 import { Button, StyleSheet, Dimensions } from 'react-native'
 import 
   Animated,
@@ -7,44 +9,62 @@ import
     useSharedValue,
     useAnimatedStyle,
     withTiming,
-    Easing
+    Easing,
+    interpolate,
+    Extrapolate
   } from 'react-native-reanimated'
 
-const WIDTH = Dimensions.get('window').width
-
 export const Splash: React.FC = () => {
+  const splashAnimation = useSharedValue(0)
 
-  const animation = useSharedValue(0)
-
-  const animatedStyles = useAnimatedStyle(() => {
+  const brandStyle = useAnimatedStyle(() => {
     return {
+      opacity:  interpolate(splashAnimation.value, 
+        [0, 50],
+        [1, 0],
+      ),
       transform: [
-        {translateX: withTiming(animation.value, { 
-          duration: 500,
-          easing: Easing.quad
-        })}
-      ]
+        { translateX: interpolate(splashAnimation.value,
+          [0, 50],
+          [0, -50],
+          Extrapolate.CLAMP
+        ) }
+      ],
     }
   })
-  
-  const handlePositionAnimation = () => {
-    animation.value = Math.random() * (WIDTH - 100)
-  }
+
+  const logoStyle = useAnimatedStyle(() => {
+    return {
+      opacity:  interpolate(splashAnimation.value, 
+        [0, 25, 50],
+        [0, 0.3, 1],
+      ),
+      transform: [
+        { translateX: interpolate(splashAnimation.value,
+          [0, 50],
+          [-50, 0],
+          Extrapolate.CLAMP
+        ) }
+      ],
+    }
+  })
+
+  useEffect(() => {
+    splashAnimation.value = withTiming(
+      50,
+      { duration: 1000 }
+    )
+  }, [])
 
   return (
     <Container>
-      <Animated.View style={[styles.box, animatedStyles]}>
-
+      <Animated.View style={[brandStyle, { position: 'absolute' }]}>
+        <Brand width={90} height={53} />
       </Animated.View>
-      <Button title='Mover' onPress={handlePositionAnimation} />
+      <Animated.View style={logoStyle}>
+        <Logo width={180} height={20} />
+      </Animated.View>
+
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'red'
-  }
-})
