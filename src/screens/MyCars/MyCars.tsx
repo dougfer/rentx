@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar, FlatList } from 'react-native'
-import { BackButton, Car, Load } from 'src/components'
+import { BackButton, Car, LoadingAnimation } from 'src/components'
 import { CarDto } from 'src/dtos/CarDTO'
 import { api } from 'src/services/api'
 import { 
@@ -65,7 +65,7 @@ export const MyCars: React.FC = () => {
           Conforto, segurança e praticidade
         </SubTitle>
       </Header>
-      {loading ? <Load /> : <Content>
+      {loading ? <LoadingAnimation /> : <Content>
         <Appointments>
           <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
           <AppointmentsQuantity>{cars.length}</AppointmentsQuantity>

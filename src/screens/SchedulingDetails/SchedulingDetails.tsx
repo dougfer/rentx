@@ -100,7 +100,7 @@ export const SchedulingDetails: React.FC = () => {
           <BackButton onPress={navigation.goBack} />
         </Header>
         <CarImages>
-          <ImageSlider imagesUrl={[car.thumbnail]} />
+          <ImageSlider imagesUrl={car.photos} />
         </CarImages>
         <Content>
           <Details>

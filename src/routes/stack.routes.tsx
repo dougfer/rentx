@@ -16,6 +16,9 @@ export const StackRoutes = () => {
       <Screen 
         name='Home'
         component={Home}
+        options={{
+          gestureEnabled: false
+        }}
       />
       <Screen 
         name='CarDetails'
