@@ -14,7 +14,6 @@ import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components'
 import theme from 'src/styles/theme'
 import { Routes } from 'src/routes'
-import 'react-native-gesture-handler'
 import { View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'intl'
