@@ -18,5 +18,5 @@ export const generateInterval = (start: DayProps, end: DayProps) => {
       }
     })
 
-    return interval
+  return interval
 }

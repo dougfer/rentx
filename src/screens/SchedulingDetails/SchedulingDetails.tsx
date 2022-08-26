@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState } from 'react'
 import { 
   Container,
@@ -72,11 +71,11 @@ export const SchedulingDetails: React.FC = () => {
       id: car.id,
       unavailable_dates
     })
-    .then(() => navigation.navigate('SchedulingComplete'))
-    .catch(() => {
-      Alert.alert('Não foi possível confirmar o agendamento')
-      setLoading(false)
-    })
+      .then(() => navigation.navigate('SchedulingComplete'))
+      .catch(() => {
+        Alert.alert('Não foi possível confirmar o agendamento')
+        setLoading(false)
+      })
   }
 
   const startDate = useMemo(() => {
@@ -115,7 +114,7 @@ export const SchedulingDetails: React.FC = () => {
             </Rent>
           </Details>
           <Acessories>
-          {car.accessories.map((accessory) => (
+            {car.accessories.map((accessory) => (
               <Accessory 
                 key={accessory.type}
                 name={accessory.name}
@@ -137,10 +136,10 @@ export const SchedulingDetails: React.FC = () => {
               <DateValue>{startDate}</DateValue>
             </DateInfo>
             <Feather 
-                name='chevron-right'
-                size={RFValue(10)}
-                color={colors.text}
-              />
+              name='chevron-right'
+              size={RFValue(10)}
+              color={colors.text}
+            />
             <DateInfo>
               <DateTitle>DE</DateTitle>
               <DateValue>{endDate}</DateValue>

@@ -1,10 +1,5 @@
-import { getStatusBarHeight } from "react-native-iphone-x-helper"
-import { RFValue } from "react-native-responsive-fontsize"
-import styled, { css } from "styled-components/native"
-
-interface DateValueProps {
-  selected?: boolean
-}
+import { RFValue } from 'react-native-responsive-fontsize'
+import styled from 'styled-components/native'
 
 export const Container = styled.View`
   flex: 1;
@@ -15,8 +10,7 @@ export const Header = styled.View`
   height: 325px;
   background-color: ${({ theme }) => theme.colors.header};
   justify-content: center;
-  padding: 25px;
-  padding-top: ${getStatusBarHeight()}px;
+  padding: 0 25px 25px 25px;
 
 `
 
@@ -34,7 +28,6 @@ export const SubTitle = styled.Text`
   font-size: ${RFValue(15)}px;
 
   margin-top: 24px;
-
 `
 
 export const Content = styled.View`

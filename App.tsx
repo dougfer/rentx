@@ -1,5 +1,4 @@
-import React from 'react';
-import { Home, CarDetails, Scheduling, SchedulingDetails, SchedulingComplete } from 'src/screens'
+import React from 'react'
 import { 
   useFonts,
   Inter_400Regular, 
@@ -41,6 +40,6 @@ export default function App() {
         <Routes />
       </ThemeProvider>
     </GestureHandlerRootView>
-  );
+  )
 }
 

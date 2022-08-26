@@ -21,34 +21,34 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ imagesUrl }) => {
   const [imageIndex, setImageIndex] = useState(0)
 
   const indexChanged = useRef((info: ChangeImageProps) => {
-    const index = info.viewableItems[0].index!
+    const index = info.viewableItems[0].index
     setImageIndex(index)
   })
 
- return (
-   <Container>
-    <ImageIndexes>
-      {imagesUrl.map((_, index) => (
-        <ImageIndex key={index} active={index === imageIndex} />
-      ))}
-    </ImageIndexes>
+  return (
+    <Container>
+      <ImageIndexes>
+        {imagesUrl.map((_, index) => (
+          <ImageIndex key={index} active={index === imageIndex} />
+        ))}
+      </ImageIndexes>
 
       <FlatList 
         data={imagesUrl}
         keyExtractor={key => key}
         pagingEnabled
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <CarImageWrapper>
             <CarImage 
-            source={{ uri: item}}
-            resizeMode='contain'
+              source={{ uri: item }}
+              resizeMode='contain'
             />
-           </CarImageWrapper>
+          </CarImageWrapper>
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={indexChanged.current}
       />
-   </Container>
- )
+    </Container>
+  )
 }

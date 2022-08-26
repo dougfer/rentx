@@ -12,7 +12,7 @@ import {
 } from './styles'
 import { format } from 'date-fns'
 import Arrow from 'src/assets/arrow.svg'
-import { Alert, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import { useTheme } from 'styled-components'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { getPlatformDate } from 'src/utils/getPlataformDate'
@@ -70,41 +70,41 @@ export const Scheduling: React.FC = () => {
 
   }
 
- return (
-  <>
-    <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
-    <Container>
-      <Header>
-        <BackButton onPress={navigation.goBack} color={theme.colors.shape} />
-        <Title>
+  return (
+    <>
+      <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
+      <Container>
+        <Header>
+          <BackButton onPress={navigation.goBack} color={theme.colors.shape} />
+          <Title>
           Escolha uma {'\n'}data de início e{'\n'}fim do aluguel
-        </Title>
-        <RentalPeriod>
-          <DateInfo>
-            <DateTitle>DE</DateTitle>
-            <DateValue selected={!!rentalPeriod.startFormatted}>
-              {rentalPeriod.startFormatted}
-            </DateValue>
-          </DateInfo>
-          <Arrow />
-          <DateInfo>
-            <DateTitle>ATÉ</DateTitle>
-            <DateValue selected={!!rentalPeriod.endFormatted}>
-              {rentalPeriod.endFormatted}
-            </DateValue>
-          </DateInfo>
-        </RentalPeriod>
-      </Header>
-      <Content>
-        <Calendar
-          markedDates={markedDates}
-          onDayPress={handleChangeDate}
-        />
-      </Content>
-      <Footer>
-        <Button title='Confirmar' enabled={!!rentalPeriod.startFormatted} onPress={handleConfirmDate} />
-      </Footer>
-    </Container>
-  </>
- )
+          </Title>
+          <RentalPeriod>
+            <DateInfo>
+              <DateTitle>DE</DateTitle>
+              <DateValue selected={!!rentalPeriod.startFormatted}>
+                {rentalPeriod.startFormatted}
+              </DateValue>
+            </DateInfo>
+            <Arrow />
+            <DateInfo>
+              <DateTitle>ATÉ</DateTitle>
+              <DateValue selected={!!rentalPeriod.endFormatted}>
+                {rentalPeriod.endFormatted}
+              </DateValue>
+            </DateInfo>
+          </RentalPeriod>
+        </Header>
+        <Content>
+          <Calendar
+            markedDates={markedDates}
+            onDayPress={handleChangeDate}
+          />
+        </Content>
+        <Footer>
+          <Button title='Confirmar' enabled={!!rentalPeriod.startFormatted} onPress={handleConfirmDate} />
+        </Footer>
+      </Container>
+    </>
+  )
 }

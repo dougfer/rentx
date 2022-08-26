@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Container } from './styles'
 import Brand from 'src/assets/brand.svg'
 import Logo from 'src/assets/logo.svg'
 import 
-  Animated,
-  { 
-    useSharedValue,
-    useAnimatedStyle,
-    withTiming,
-    interpolate,
-    Extrapolate,
-    runOnJS
-  } from 'react-native-reanimated'
+Animated,
+{ 
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  interpolate,
+  Extrapolate,
+  runOnJS
+} from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
+import { StatusBar } from 'react-native'
 
 export const Splash: React.FC = () => {
   const splashAnimation = useSharedValue(0)
@@ -51,9 +52,9 @@ export const Splash: React.FC = () => {
     }
   })
 
-  const startApp = () => {
+  const startApp = useCallback(() => {
     navigation.navigate('Home')
-  }
+  }, [navigation])
 
   useEffect(() => {
     splashAnimation.value = withTiming(
@@ -65,17 +66,20 @@ export const Splash: React.FC = () => {
       }
 
     )
-  }, [])
+  }, [splashAnimation, startApp])
 
   return (
-    <Container>
-      <Animated.View style={[brandStyle, { position: 'absolute' }]}>
-        <Brand width={90} height={53} />
-      </Animated.View>
-      <Animated.View style={logoStyle}>
-        <Logo width={180} height={20} />
-      </Animated.View>
+    <>
+      <StatusBar barStyle='light-content' translucent backgroundColor='transparent' />
+      <Container>
+        <Animated.View style={[brandStyle, { position: 'absolute' }]}>
+          <Brand width={90} height={53} />
+        </Animated.View>
+        <Animated.View style={logoStyle}>
+          <Logo width={180} height={20} />
+        </Animated.View>
 
-    </Container>
+      </Container>
+    </>
   )
 }

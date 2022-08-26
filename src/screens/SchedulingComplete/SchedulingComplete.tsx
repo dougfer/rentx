@@ -23,22 +23,22 @@ export const SchedulingComplete: React.FC = () => {
     navigation.navigate('Home')
   }
 
- return (
-  <>
-  <StatusBar translucent barStyle='light-content' backgroundColor='transparent' />
-   <Container>
-    <Logo width={width} />
-    <Content>
-      <Done width={80} height={80} />
-      <Title>Carro alugado</Title>
-      <Message>Agora você só precisa ir {'\n'} até a concessionária da RENTX 
-        {'\n'} pegar o seu automóvel.
-      </Message>
-    </Content>
-    <Footer>
-      <ConfirmButton title='OK' onPress={handleConfirm} />
-    </Footer>
-   </Container>
-  </>
- )
+  return (
+    <>
+      <StatusBar translucent barStyle='light-content' backgroundColor='transparent' />
+      <Container>
+        <Logo width={width} />
+        <Content>
+          <Done width={80} height={80} />
+          <Title>Carro alugado</Title>
+          <Message>Agora você só precisa ir {'\n'} até a concessionária da RENTX 
+            {'\n'} pegar o seu automóvel.
+          </Message>
+        </Content>
+        <Footer>
+          <ConfirmButton title='OK' onPress={handleConfirm} />
+        </Footer>
+      </Container>
+    </>
+  )
 }

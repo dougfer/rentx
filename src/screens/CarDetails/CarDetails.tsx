@@ -87,7 +87,7 @@ export const CarDetails: React.FC = () => {
             ]}
         >
           <Header>
-            <BackButton onPress={navigation.goBack} style={style.back} />
+            <BackButton onPress={navigation.goBack} />
           </Header>
           <Animated.View style={[sliderCarsStyleAnimation]}>
             <CarImages>
@@ -148,7 +148,7 @@ const style = StyleSheet.create({
     overflow: 'hidden',
     zIndex: 1
   },
-  back: {
-    marginTop: 10
-  }
+  // back: {
+  //   marginTop: 10
+  // }
 })

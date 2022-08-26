@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Container, Title } from './styles'
-import { RectButtonProps } from "react-native-gesture-handler"
+import { RectButtonProps } from 'react-native-gesture-handler'
 import { ActivityIndicator } from 'react-native'
 import theme from 'src/styles/theme'
 
@@ -13,9 +13,9 @@ interface ButtonProps extends RectButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ title, color, enabled = true, loading, ...rest }) => {
- return (
-   <Container {...rest} color={color} enabled={enabled || !loading} loading={loading}>
+  return (
+    <Container {...rest} color={color} enabled={enabled || !loading} loading={loading}>
       {loading ? <ActivityIndicator color={theme.colors.shape} /> : <Title>{title}</Title>}
-   </Container>
- )
+    </Container>
+  )
 }

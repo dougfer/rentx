@@ -7,16 +7,15 @@ import { Car } from 'src/components'
 import { useNavigation } from '@react-navigation/native'
 import { api } from 'src/services/api'
 import { CarDto } from 'src/dtos/CarDTO'
-import { Load, LoadingAnimation } from 'src/components'
+import { LoadingAnimation } from 'src/components'
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 import Animated, 
-  { 
-    useSharedValue, 
-    useAnimatedStyle, 
-    useAnimatedGestureHandler,
-    withSpring
-  } from 'react-native-reanimated'
+{ 
+  useSharedValue, 
+  useAnimatedStyle, 
+  useAnimatedGestureHandler,
+} from 'react-native-reanimated'
 import { RectButton, PanGestureHandler } from 'react-native-gesture-handler'
 
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton)
@@ -50,9 +49,6 @@ export const Home: React.FC = () => {
       positionX.value = ctx.positionX + event.translationX
       positionY.value = ctx.positionY + event.translationY
     },
-    onEnd(_, ctx: any) {
-
-    }
   })
 
   const handleCarDetails = (item: CarDto) => {
@@ -95,16 +91,20 @@ export const Home: React.FC = () => {
         <Header>
           <HeaderContent>
             <Logo width={RFValue(108)} height={RFValue(12)} />
-            {!isLoading && <TotalCars>
+            {!isLoading && (
+              <TotalCars>
               Total de {cars.length} carros
-            </TotalCars>}
+              </TotalCars>
+            )}
           </HeaderContent>
         </Header>
-        { isLoading ? <LoadingAnimation /> : <CarList 
-          data={cars}
-          renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
-          keyExtractor={item => item.id}
-        />}
+        { isLoading ? <LoadingAnimation /> : (
+          <CarList 
+            data={cars}
+            renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
+            keyExtractor={item => item.id}
+          />
+        )}
         <PanGestureHandler
           onGestureEvent={onGestureEvent}
         >

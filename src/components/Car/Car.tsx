@@ -11,7 +11,6 @@ import {
   Type,
   CardImage,
 } from './styles'
-import GasolineSvg from 'src/assets/gasoline.svg'
 import { RectButtonProps } from 'react-native-gesture-handler'
 import { CarDto } from 'src/dtos/CarDTO'
 import { getAccessoryIcon } from 'src/utils/getAccessoryIcon'
@@ -21,7 +20,7 @@ interface CarProps extends RectButtonProps {
   children?: ReactNode
 }
 
-export const Car: React.FC<CarProps> = ({data, children, ...rest}) => {
+export const Car: React.FC<CarProps> = ({ data, ...rest }) => {
   
   const {  brand, name, rent, thumbnail, fuel_type  } = data
   const MotorIcon = getAccessoryIcon(fuel_type)
@@ -42,7 +41,7 @@ export const Car: React.FC<CarProps> = ({data, children, ...rest}) => {
         </About>
       </Details>
 
-      <CardImage resizeMode='contain' source={{uri: thumbnail}} />
+      <CardImage resizeMode='contain' source={{ uri: thumbnail }} />
     </Container>
   )
 }

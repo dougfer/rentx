@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 import { FlatList, FlatListProps } from 'react-native'
 import { CarDto } from 'src/dtos/CarDTO'
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler'
+import { RectButton } from 'react-native-gesture-handler'
 
 type NyCarsButtonProps = {
   children?: ReactNode
@@ -11,10 +11,10 @@ type NyCarsButtonProps = {
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.colors.background_primary};
+  background-color: ${({ theme }) => theme.colors.background_primary};
 `
 export const Header = styled.View`
-  background-color: ${({theme}) => theme.colors.header};
+  background-color: ${({ theme }) => theme.colors.header};
   width: 100%;
   height: 113px;
   justify-content: flex-end;
@@ -23,8 +23,8 @@ export const Header = styled.View`
 
 export const TotalCars = styled.Text`
   font-size: ${RFValue(15)}px;
-  font-family: ${({theme}) => theme.fonts.primary_400};
-  color: ${({theme}) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.text};
 `
 
 export const HeaderContent = styled.View`
@@ -44,7 +44,7 @@ export const CarList = styled(FlatList as new (props: FlatListProps<CarDto>) => 
 export const NyCarsButton = styled(RectButton)<NyCarsButtonProps>`
   width: 60px;
   height: 60px;
-  background-color: ${({theme}) => theme.colors.main};
+  background-color: ${({ theme }) => theme.colors.main};
   align-items: center;
   justify-content: center;
 

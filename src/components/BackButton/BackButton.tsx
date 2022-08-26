@@ -12,13 +12,13 @@ export const BackButton: React.FC<BackButtonProps> = ({ color, ...rest }) => {
 
   const theme = useTheme()
 
- return (
-   <Container {...rest}>
-    <MaterialIcons 
-      name='chevron-left'
-      size={24}
-      color={color || theme.colors.text}
-    />
-   </Container>
- )
+  return (
+    <Container {...rest}>
+      <MaterialIcons 
+        name='chevron-left'
+        size={24}
+        color={color || theme.colors.text}
+      />
+    </Container>
+  )
 }
