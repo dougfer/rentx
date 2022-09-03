@@ -9,20 +9,37 @@ export interface PasswordInputProps extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name']
 } 
 
-export const PasswordInput: React.FC<PasswordInputProps> = ({ iconName, ...rest }) => {
+export const PasswordInput: React.FC<PasswordInputProps> = ({ iconName, value, ...rest }) => {
   const [isPasswordVisible, setPasswordVisible] = useState(true)
+  const [isFocused, setIsFocused] = useState(false)
+  const [isFilled, setIsFilled] = useState(false)
   const { colors } = useTheme()
 
+
+  const handleInputFocused = () => {
+    setIsFocused(true)
+  }
+
+  const handleINputBlur = () => {
+    setIsFocused(false)
+    setIsFilled(!!value)
+  }
+
   return (
-    <Container>
+    <Container isFocused={isFocused}>
       <IconContainer>
         <Feather 
           name={iconName}
           size={24}
-          color={colors.text_detail}
+          color={(isFocused || isFilled) ? colors.main : colors.text_detail}
         />
       </IconContainer>
-      <InputText {...rest} secureTextEntry={isPasswordVisible} />
+      <InputText 
+        secureTextEntry={isPasswordVisible} 
+        onFocus={handleInputFocused}
+        onBlur={handleINputBlur}
+        {...rest} 
+      />
       <BorderlessButton onPress={() => setPasswordVisible(!isPasswordVisible)}>
         <IconContainer style={{ marginRight: 0 }}>
           <Feather 
