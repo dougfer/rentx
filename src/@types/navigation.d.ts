@@ -10,6 +10,7 @@ export declare global {
       SchedulingDetails: { car: CarDto, dates: string[] }
       MyCars: undefined
       Splash: undefined
+      SignIn: undefined
     }
   }
 }
