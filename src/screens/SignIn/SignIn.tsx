@@ -4,15 +4,37 @@ import {
   StatusBar, 
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native'
 import { Button, Input, PasswordInput } from 'src/components'
 import { useTheme } from 'styled-components'
+import * as yup from 'yup'
 
 export const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { colors } = useTheme()
+
+  const schema = yup.object().shape({
+    email: yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
+    password: yup.string().required('Campo obrigatório')
+  })
+
+  const handleSignin = async () => {
+    try {
+      await schema.validate({ email, password })
+      Alert.alert('Deu certo')
+    } catch (error) {
+      if(error instanceof yup.ValidationError) {
+        return Alert.alert('Opa', error.message)
+      }
+      Alert.alert(
+        'Erro na autenticação',
+        'Ocorreu um erro ao fazer login, verifique as credenciais'
+      )
+    }
+  }
 
   return (
     <>
@@ -48,14 +70,14 @@ export const SignIn: React.FC = () => {
             <Footer>
               <Button
                 title='Login'
-                onPress={() => {return}}
-                enabled={false}
+                onPress={handleSignin}
+                // enabled={false}
               />
               <Button
                 title='Criar conta gratuita'
                 light
                 color={colors.background_secondary}
-                onPress={() => {return}}
+                // onPress={handleSignin}
                 enabled={false}
 
               />

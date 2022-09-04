@@ -8,7 +8,6 @@ interface ButtonProps extends RectButtonProps {
   title: string
   children?: ReactNode 
   color?: string
-  enabled?: boolean
   loading?: boolean
   light?: boolean
 }

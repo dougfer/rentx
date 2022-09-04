@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, InputText, IconContainer } from './styles'
+import { Container, InputText, IconContainer, Separator } from './styles'
 import { useTheme } from 'styled-components'
 import { Feather } from '@expo/vector-icons'
 import { TextInputProps } from 'react-native'
@@ -26,22 +26,26 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({ iconName, value, .
   }
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer
+        isFocused={isFocused}
+      >
         <Feather 
           name={iconName}
           size={24}
           color={(isFocused || isFilled) ? colors.main : colors.text_detail}
         />
       </IconContainer>
-      <InputText 
+      <Separator isFocused={isFocused} />
+      <InputText
+        isFocused={isFocused}
         secureTextEntry={isPasswordVisible} 
         onFocus={handleInputFocused}
         onBlur={handleINputBlur}
         {...rest} 
       />
       <BorderlessButton onPress={() => setPasswordVisible(!isPasswordVisible)}>
-        <IconContainer style={{ marginRight: 0 }}>
+        <IconContainer style={{ marginRight: 0 }} isFocused={isFocused}>
           <Feather 
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}

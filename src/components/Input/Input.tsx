@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, InputText, IconContainer } from './styles'
+import { Container, InputText, IconContainer, Separator } from './styles'
 import { useTheme } from 'styled-components'
 import { Feather } from '@expo/vector-icons'
 import { TextInputProps } from 'react-native'
@@ -23,15 +23,17 @@ export const Input: React.FC<InputProps> = ({ iconName, value, ...rest }) => {
   }
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer isFocused={isFocused} >
         <Feather 
           name={iconName}
           size={24}
           color={(isFocused || isFilled) ? colors.main : colors.text_detail}
         />
       </IconContainer>
+      <Separator isFocused={isFocused} />
       <InputText
+        isFocused={isFocused}
         onFocus={handleInputFocused}
         onBlur={handleINputBlur}
         {...rest} 

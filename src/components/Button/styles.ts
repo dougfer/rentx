@@ -6,7 +6,6 @@ import { RFValue } from 'react-native-responsive-fontsize'
 interface ButtonProps extends RectButtonProps {
   color?: string
   children?: ReactNode
-  enabled?: boolean
   loading?: boolean
 }
 
