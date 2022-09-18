@@ -11,6 +11,7 @@ export declare global {
       MyCars: undefined
       Splash: undefined
       SignIn: undefined
+      SignUp: undefined
     }
   }
 }

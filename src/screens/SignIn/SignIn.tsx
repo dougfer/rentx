@@ -10,11 +10,14 @@ import {
 import { Button, Input, PasswordInput } from 'src/components'
 import { useTheme } from 'styled-components'
 import * as yup from 'yup'
+import { useNavigation } from '@react-navigation/native'
 
 export const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { colors } = useTheme()
+
+  const navigation = useNavigation()
 
   const schema = yup.object().shape({
     email: yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
@@ -34,6 +37,11 @@ export const SignIn: React.FC = () => {
         'Ocorreu um erro ao fazer login, verifique as credenciais'
       )
     }
+  }
+
+  const handleSignUp = () => {
+    console.log('fui chamado')
+    navigation.navigate('SignUp')
   }
 
   return (
@@ -77,9 +85,7 @@ export const SignIn: React.FC = () => {
                 title='Criar conta gratuita'
                 light
                 color={colors.background_secondary}
-                // onPress={handleSignin}
-                enabled={false}
-
+                onPress={handleSignUp}
               />
             </Footer>
           </Container>
