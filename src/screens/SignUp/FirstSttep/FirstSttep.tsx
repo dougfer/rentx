@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BackButton, Bullet, Input, Button } from 'src/components'
 import { 
   Container,
@@ -10,11 +10,36 @@ import {
   FormTitle,
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { StatusBar, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import * as yup from 'yup'
+import { StatusBar, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 
 export const FirstSttep: React.FC = () => {
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [driverLicense, setDriverLicense] = useState('')
 
   const navigation = useNavigation()
+
+  const handleNextStep = async () => {
+    try {
+
+      const schema = yup.object().shape({
+        driverLicense: yup.string().required('CNH é obrigatória'),
+        email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
+        name: yup.string().required('Nome é obrigatório'),
+      })
+
+      const data = { name, email, driverLicense }
+
+      await schema.validate(data)
+
+      navigation.navigate('SignUpSecondStep', data)
+    } catch (error) {
+      if(error instanceof yup.ValidationError) {
+        return Alert.alert('Opa', error.message)
+      }
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -41,20 +66,28 @@ export const FirstSttep: React.FC = () => {
             <Input 
               iconName='user'
               placeholder='Nome'
+              value={name}
+              onChangeText={setName}
             />
             <Input 
               iconName='mail'
               placeholder='E-mail'
+              keyboardType='email-address'
+              value={email}
+              onChangeText={setEmail}
             />
             <Input 
               iconName='credit-card'
               placeholder='CNH'
+              keyboardType='number-pad'
+              value={driverLicense}
+              onChangeText={setDriverLicense}
             />
           </Form>
-          <Button 
+          <Button
+            onPress={handleNextStep}
             title='Próximo'
           />
-
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

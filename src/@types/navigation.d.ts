@@ -1,5 +1,5 @@
 import { CarDto } from 'src/dtos/CarDTO'
-
+import { UserInfo } from 'src/types/user'
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -12,6 +12,7 @@ export declare global {
       Splash: undefined
       SignIn: undefined
       SignUp: undefined
+      SignUpSecondStep: UserInfo
     }
   }
 }
