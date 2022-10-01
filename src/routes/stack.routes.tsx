@@ -4,7 +4,7 @@ import {
   CarDetails, 
   Home, 
   Scheduling, 
-  SchedulingComplete, 
+  Confirmation, 
   SchedulingDetails, 
   MyCars, 
   Splash,
@@ -52,8 +52,8 @@ export const StackRoutes = () => {
         component={Scheduling}
       />
       <Screen 
-        name='SchedulingComplete'
-        component={SchedulingComplete}
+        name='Confirmation'
+        component={Confirmation}
       />
       <Screen 
         name='SchedulingDetails'

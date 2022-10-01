@@ -33,6 +33,12 @@ export const SecondStep: React.FC = () => {
     if(password !== passwordConfirm) {
       return Alert.alert('As senhas não são iguais')
     }
+
+    navigation.navigate('Confirmation', { 
+      title: 'Conta criada!',
+      message: `Agora é só fazer o login\ne aproveitar`,
+      nextScreenRoute: 'SignIn'
+    })
   }
 
   return (
