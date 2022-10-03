@@ -13,6 +13,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { StatusBar, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import { useTheme } from 'styled-components'
 import { UserInfo } from 'src/types/user'
+import { api } from 'src/services/api'
 
 export const SecondStep: React.FC = () => {
   const [password, setPassword] = useState('')
@@ -26,7 +27,7 @@ export const SecondStep: React.FC = () => {
 
   const { colors } = useTheme()
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if(!password || !passwordConfirm) {
       return Alert.alert('Informe a senha e a confirmação')
     }
@@ -34,11 +35,19 @@ export const SecondStep: React.FC = () => {
       return Alert.alert('As senhas não são iguais')
     }
 
-    navigation.navigate('Confirmation', { 
-      title: 'Conta criada!',
-      message: `Agora é só fazer o login\ne aproveitar`,
-      nextScreenRoute: 'SignIn'
-    })
+    await api.post('/users', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password,
+    }).then(() => {
+      navigation.navigate('Confirmation', { 
+        title: 'Conta criada!',
+        message: `Agora é só fazer o login\ne aproveitar`,
+        nextScreenRoute: 'SignIn'
+      })
+
+    }).catch(() => Alert.alert('Opa', 'Não foi possível cadastrar'))
   }
 
   return (

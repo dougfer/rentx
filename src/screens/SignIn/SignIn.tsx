@@ -11,11 +11,14 @@ import { Button, Input, PasswordInput } from 'src/components'
 import { useTheme } from 'styled-components'
 import * as yup from 'yup'
 import { useNavigation } from '@react-navigation/native'
+import { useAuth } from 'src/hooks/auth'
 
 export const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { colors } = useTheme()
+
+  const { signIn } = useAuth()
 
   const navigation = useNavigation()
 
@@ -28,6 +31,8 @@ export const SignIn: React.FC = () => {
     try {
       await schema.validate({ email, password })
       Alert.alert('Deu certo')
+
+      signIn({ email, password })
     } catch (error) {
       if(error instanceof yup.ValidationError) {
         return Alert.alert('Opa', error.message)
@@ -40,7 +45,6 @@ export const SignIn: React.FC = () => {
   }
 
   const handleSignUp = () => {
-    console.log('fui chamado')
     navigation.navigate('SignUp')
   }
 
